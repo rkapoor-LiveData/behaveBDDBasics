@@ -7,10 +7,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 options = Options()
 options.add_experimental_option('detach', True)
+options.add_argument("--headless=new")
 
 
 def before_scenario(context, driver):
     context.driver = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
+    context.driver.implicitly_wait(30)
 
 
 def after_step(context, step):
